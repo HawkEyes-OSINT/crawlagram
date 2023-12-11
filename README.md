@@ -10,7 +10,7 @@ CrawlaGram is a Python program designed to find and filter Telegram groups based
    - Open a terminal or command prompt.
    - Run the following command to clone the CrawlaGram repository from GitHub:
      ```bash
-     git clone https://github.com/your-username/crawlagram.git
+     git clone https://github.com/HawkEyes-OSINT/crawlagram.git
      ```
 
 2. **Navigate to the CrawlaGram Directory:**
@@ -31,12 +31,11 @@ CrawlaGram is a Python program designed to find and filter Telegram groups based
    - Open the `inputs/config.csv` file and enter your Telegram API bot configurations.
    - Ensure you provide values for `api_id`, `api_hash`, and `phone`.
 
-2. **Coordinates Configuration (Optional):**
+2. **Coordinates Configuration:**
    - If using the geolocation feature, provide coordinates in the `inputs/cordinates.csv` file.
 
 3. **Groups Configuration:**
    - Edit the `inputs/groups.csv` file:
-     - Fill out the `cordinates.csv` file with latitude and longitude if you want to find groups based on coordinates.
      - If you wish to provide a list of groups, enter the group usernames in the ID column.
 
 4. **Filter Configuration:**
