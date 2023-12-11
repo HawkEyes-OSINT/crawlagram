@@ -1,5 +1,4 @@
 from telethon.sync import TelegramClient
-import telegram
 from config import getconfig
 from colorama import Fore
 import asyncio
