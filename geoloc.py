@@ -62,10 +62,14 @@ async def find_groups(client):
             
             # add groups/channels to list
             for channel in channels:
-                found_groups.append({'ID': channel.id, 
-                               'Name': channel.title, 
-                               'Type': 'Channel', 
-                               'Location': cord})
+                # Check if the channel ID already exists in the list
+                if not any(group['ID'] == channel.id for group in found_groups):
+                    found_groups.append({
+                        'ID': channel.id, 
+                        'Name': channel.title, 
+                        'Type': 'Channel', 
+                        'Location': cord
+                    })
 
         else:
             print('[-] No groups/channels found')
