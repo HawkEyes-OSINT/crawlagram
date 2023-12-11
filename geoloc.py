@@ -17,7 +17,7 @@ def retreive_cordinates():
     create list of cordinates to check
     """
     cordinates = []
-    format = re.compile(r'^(-\d{1,2}|\d{1,2})\.[0-9]+$')
+    format = re.compile(r'^(-\d{1,3}|\d{1,3})\.[0-9]+$')
 
     # verify file exists
     if os.path.isfile("inputs/cordinates.csv"):
