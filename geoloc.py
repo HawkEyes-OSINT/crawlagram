@@ -17,7 +17,7 @@ def retreive_cordinates():
     create list of cordinates to check
     """
     cordinates = []
-    format = re.compile(r'^\d{2}\.[0-9]+$')
+    format = re.compile(r'^[-\d]{2}\.[0-9]+$')
 
     # verify file exists
     if os.path.isfile("inputs/cordinates.csv"):
@@ -57,21 +57,14 @@ async def find_groups(client):
             
         if result:
             # get relevant data from results
-            channels = [chat for chat in result.chats if getattr(chat, 'megagroup', False)]
-            groups = [chat for chat in result.chats if getattr(chat, 'megagroup', False)]
-            print(f'[+] Found {len(channels)} channels and {len(groups)} groups at location {cord}')
+            channels = [chat for chat in result.chats]
+            print(f'[+] Found {len(channels)} channels/groups at location {cord}')
             
             # add groups/channels to list
             for channel in channels:
                 found_groups.append({'ID': channel.id, 
                                'Name': channel.title, 
                                'Type': 'Channel', 
-                               'Location': cord})
-
-            for group in groups:
-                found_groups.append({'ID': group.id, 
-                               'Name': group.title, 
-                               'Type': 'Group', 
                                'Location': cord})
 
         else:
