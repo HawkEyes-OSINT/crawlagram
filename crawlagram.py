@@ -95,6 +95,7 @@ async def main():
 
         if input == "3":
             print(Fore.RED + "Exiting...")
+            exit()
 
 if __name__ == "__main__":
     asyncio.run(main())
