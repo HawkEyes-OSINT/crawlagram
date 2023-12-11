@@ -77,5 +77,5 @@ async def find_groups(client):
         else:
             print('[-] No groups/channels found')
 
-        return found_groups
+    return found_groups
     
