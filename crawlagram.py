@@ -73,7 +73,7 @@ async def main():
                     print(Fore.GREEN + "Completed search and filter of groups/channels")
                     print(Fore.GREEN + "List of groups can be found in output/groups.csv")
                     print(Fore.GREEN + "Chat history can be found in output/chat/<group-name>.csv")
-                except:
+                except Exception as e:
                     print(Fore.RED + "Error: " + str(e))
                     continue
 

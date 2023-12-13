@@ -1,9 +1,6 @@
-from config import getconfig
-import csv
 import os
 import re
-from telethon import functions, types, sync
-import asyncio
+from telethon import functions, types
 
 """
 Find groups in 10km radious of given coordinates
@@ -66,8 +63,9 @@ async def find_groups(client):
                 if not any(group['ID'] == channel.id for group in found_groups):
                     found_groups.append({
                         'ID': channel.id, 
-                        'Name': channel.title, 
-                        'Type': 'Channel', 
+                        'Title': channel.title,
+                        'Username': channel.username, 
+                        'Hash': channel.access_hash, 
                         'Location': cord
                     })
 

@@ -1,8 +1,5 @@
 import csv
-import re
 import os
-import asyncio
-from telethon.sync import TelegramClient
 
 """
 Get groups as imput or from CSV
@@ -20,8 +17,8 @@ def get_groups():
         reader = csv.DictReader(f)
         for row in reader:
             groups.append({'ID': row['ID'],
-                           'Name': row['Name'],
-                           'Type': '',
+                           'Title': row['Name'],
+                           'Hash': '',
                            'Location': ''})
     return groups
 
@@ -54,9 +51,9 @@ async def filter_groups(client, groups):
 
         # get chat history
         try:
-            print(f'[+] Getting chat history for {group["Name"]}')
+            print(f'[+] Getting chat history for {group["Title"]}')
             history = await client.get_messages(group['ID'], limit=LIMIT)
-            print(f'[+] Filtering {group["Name"]}')
+            print(f'[+] Filtering {group["Title"]}')
             if history:
                 for message in history:
 
@@ -77,21 +74,22 @@ async def filter_groups(client, groups):
 
             # add kept group
             if keep:
-                print(f'[+] Keeping {group["Name"]}')
+                print(f'[+] Keeping {group["Title"]}')
                 
                 # append group to list
                 filtered_groups.append({'ID': group['ID'],
-                                    'Name': group['Name'],
-                                    'Type': group['Type'],
+                                        'Username': group['Username'],
+                                    'Title': group['Title'],
+                                    'Hash': group['Hash'],
                                     'Location': group['Location'],
                                     'Hits': hits,
                                     'Matches': matches})
             
                 # export chat history to csv
                 group_folder = os.makedirs(f'outputs/chats', exist_ok=True)
-                with open(f'outputs/chats/{group["Name"]}.csv', 'w', newline='', encoding='utf-8') as f:
+                with open(f'outputs/chats/{group["Title"]}.csv', 'w', newline='', encoding='utf-8') as f:
                     writer = csv.writer(f)
-                    writer.writerow(['Sender ID', 'Sender Name', 'Date', 'Text'])
+                    writer.writerow(['Sender ID', 'Sender Title', 'Date', 'Text'])
                     for message in history:
 
                         # get name of sender
@@ -108,15 +106,15 @@ async def filter_groups(client, groups):
                         # write to csv
                         writer.writerow([message.sender_id, name, message.date, message.text])
             else:
-                print(f'[-] Removing {group["Name"]}')
+                print(f'[-] Removing {group["Title"]}')
         
         except Exception as e:
-            print(f'[-] Error getting chat history for {group["Name"]}: {e}')
+            print(f'[-] Error getting chat history for {group["Title"]}: {e}')
             continue
             
     # export filtered groups to csv
     with open('outputs/filtered_groups.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['ID', 'Name', 'Type', 'Location', 'Hits', 'Matches'])
+        writer = csv.DictWriter(f, fieldnames=['ID', 'Username', 'Title', 'Hash', 'Location', 'Hits', 'Matches'])
         writer.writeheader()
         for group in filtered_groups:
             writer.writerow(group)
