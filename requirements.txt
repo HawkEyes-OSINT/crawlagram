@@ -1,5 +1,4 @@
 telethon
 colorama
 pyfiglet
-re
 utils
