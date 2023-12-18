@@ -16,7 +16,7 @@ def get_groups():
     with open('inputs/groups.csv', 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            groups.append({'ID': row['ID'],
+            groups.append({'Username': row['ID'],
                            'Title': row['Name'],
                            'Hash': '',
                            'Location': ''})
@@ -77,8 +77,7 @@ async def filter_groups(client, groups):
                 print(f'[+] Keeping {group["Title"]}')
                 
                 # append group to list
-                filtered_groups.append({'ID': group['ID'],
-                                        'Username': group['Username'],
+                filtered_groups.append({'Username': group['Username'],
                                     'Title': group['Title'],
                                     'Hash': group['Hash'],
                                     'Location': group['Location'],
@@ -114,7 +113,7 @@ async def filter_groups(client, groups):
             
     # export filtered groups to csv
     with open('outputs/filtered_groups.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['ID', 'Username', 'Title', 'Hash', 'Location', 'Hits', 'Matches'])
+        writer = csv.DictWriter(f, fieldnames=['Username', 'Title', 'Hash', 'Location', 'Hits', 'Matches'])
         writer.writeheader()
         for group in filtered_groups:
             writer.writerow(group)
