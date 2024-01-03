@@ -52,7 +52,10 @@ async def filter_groups(client, groups):
         # get chat history
         try:
             print(f'[+] Getting chat history for {group["Title"]}')
-            history = await client.get_messages(group['Username'], limit=LIMIT)
+            if group['Username']:
+                history = await client.get_messages(group['Username'], limit=LIMIT)
+            else:
+                history = []
             print(f'[+] Filtering {group["Title"]}')
             if history:
                 for message in history:

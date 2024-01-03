@@ -3,7 +3,6 @@ from config import getconfig
 from colorama import Fore
 import asyncio
 import pyfiglet
-from telethon.sync import TelegramClient
 from telethon.errors import SessionPasswordNeededError
 from geoloc import find_groups
 from filter import filter_groups, get_groups
